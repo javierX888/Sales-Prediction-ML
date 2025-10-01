@@ -35,3 +35,6 @@ Aplicación backend con análisis de datos operacionales
 ## Contacto
 📧 javiergaci.q@gmail.com
 💼 [LinkedIn](https://www.linkedin.com/in/javier-gacitúa)
+
+## Estadísticas de GitHub
+![Javier's GitHub stats](https://github-readme-stats.vercel.app/api?username=javierX888&show_icons=true&theme=default)
