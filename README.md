@@ -30,4 +30,4 @@ Aplicación backend con análisis de datos operacionales
 
 ## Contacto
 📧 javiergaci.q@gmail.com
-💼 [LinkedIn](linkedin.com/in/javier-gacitúa)
+💼 [LinkedIn](https://www.linkedin.com/in/javier-gacitúa)
