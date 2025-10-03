@@ -205,3 +205,63 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ==========================================
+# DOCKER SPECIFIC
+# ==========================================
+
+# Environment variables
+.env
+
+# Kaggle API Token (NUNCA subir a GitHub - contiene credenciales privadas)
+kaggle.json
+.kaggle/
+
+# Docker volumes data (exclude large datasets)
+data/raw/*.csv
+data/raw/*.xlsx
+data/raw/*.json
+data/raw/*.parquet
+data/raw/*.zip
+
+# Permitir explícitamente train.csv
+!data/raw/train.csv
+
+# Excluir datos procesados (se generan automáticamente)
+data/processed/*.csv
+data/processed/*.pkl
+data/processed/*.parquet
+
+# EXCEPCIÓN: Permitir README
+!data/raw/README.md
+!data/processed/README.md
+
+# Keep folder structure
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Docker override files
+docker-compose.override.yml
+
+# Models (too large for git)
+models/saved_models/*.pkl
+models/saved_models/*.joblib
+models/saved_models/*.h5
+models/saved_models/*.model
+models/saved_models/*.pt
+models/saved_models/*.pth
+!models/saved_models/.gitkeep
+
+# Docker build cache
+.docker/
+
+# Container logs
+*.log
+logs/
+
+Sales-Prediction-ML/
+├── copy_local_dataset.py    ← AQUÍ (raíz del proyecto)
+├── train.csv                 ← Tu archivo actual
+├── docker-compose.yml
+├── Dockerfile
+└── ...

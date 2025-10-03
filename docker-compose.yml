@@ -1,0 +1,72 @@
+services:
+  # ==========================================
+  # Servicio Principal: Jupyter Lab + Python
+  # ==========================================
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sales-prediction-jupyter
+    ports:
+      - "8888:8888"  # Jupyter Lab
+    volumes:
+      - ./data:/app/data
+      - ./notebooks:/app/notebooks
+      - ./src:/app/src
+      - ./models:/app/models
+      - ./app:/app/app
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    networks:
+      - sales-network
+    restart: unless-stopped
+    command: jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''
+
+  # ==========================================
+  # Servicio de Dashboard: Streamlit
+  # ==========================================
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sales-prediction-dashboard
+    ports:
+      - "8501:8501"  # Streamlit Dashboard
+    volumes:
+      - ./data:/app/data
+      - ./src:/app/src
+      - ./models:/app/models
+      - ./app:/app/app
+    networks:
+      - sales-network
+    restart: unless-stopped
+    command: streamlit run app/dashboard.py --server.port=8501 --server.address=0.0.0.0
+    depends_on:
+      - jupyter
+
+  # ==========================================
+  # Servicio Python (para scripts)
+  # ==========================================
+  python-scripts:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sales-prediction-scripts
+    volumes:
+      - ./data:/app/data
+      - ./notebooks:/app/notebooks
+      - ./src:/app/src
+      - ./models:/app/models
+      - ./app:/app/app
+    networks:
+      - sales-network
+    command: tail -f /dev/null  # Mantener contenedor activo
+    restart: unless-stopped
+
+networks:
+  sales-network:
+    driver: bridge
+
+volumes:
+  data-volume:
+  models-volume:
