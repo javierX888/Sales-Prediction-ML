@@ -2,15 +2,11 @@
 Dashboard API para Vercel - Sales Prediction ML
 Autor: Javier Gacitúa | Octubre 2025
 """
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, request, jsonify
 import pandas as pd
-import json
 from pathlib import Path
-import os
 
-app = Flask(__name__, 
-           template_folder='../templates',
-           static_folder='../static')
+app = Flask(__name__)
 
 # Cargar datos de muestra
 def load_data():
@@ -36,7 +32,32 @@ def load_data():
 @app.route('/')
 def home():
     """Página principal del dashboard"""
-    return render_template('index.html')
+    try:
+        # Leer el HTML directamente
+        html_path = Path(__file__).parent.parent / 'templates' / 'index.html'
+        if html_path.exists():
+            with open(html_path, 'r', encoding='utf-8') as f:
+                return f.read()
+        else:
+            return '''
+            <!DOCTYPE html>
+            <html>
+            <head><title>Sales Prediction ML</title></head>
+            <body>
+                <h1>Sales Prediction ML Dashboard</h1>
+                <p>Template not found. API endpoints available:</p>
+                <ul>
+                    <li>/api/health</li>
+                    <li>/api/stats</li>
+                    <li>/api/data</li>
+                    <li>/api/categories</li>
+                    <li>/api/predict (POST)</li>
+                </ul>
+            </body>
+            </html>
+            '''
+    except Exception as e:
+        return f'<html><body><h1>Error</h1><p>{str(e)}</p></body></html>', 500
 
 @app.route('/api/stats')
 def get_stats():
@@ -138,10 +159,3 @@ def health():
         'service': 'Sales Prediction ML Dashboard',
         'version': '1.0.0'
     })
-
-# Necesario para Vercel
-application = app
-
-# Para desarrollo local
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
