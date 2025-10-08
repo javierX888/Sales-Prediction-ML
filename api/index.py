@@ -3,31 +3,32 @@ Dashboard API para Vercel - Sales Prediction ML
 Autor: Javier Gacitúa | Octubre 2025
 """
 from flask import Flask, request, jsonify
-import pandas as pd
 from pathlib import Path
 
 app = Flask(__name__)
 
-# Cargar datos de muestra
+# Datos de muestra estáticos (sin pandas para evitar problemas de compatibilidad)
+SAMPLE_DATA = [
+    {'Sales': 261.96, 'Category': 'Furniture', 'Region': 'South', 'Segment': 'Consumer'},
+    {'Sales': 731.94, 'Category': 'Furniture', 'Region': 'South', 'Segment': 'Consumer'},
+    {'Sales': 14.62, 'Category': 'Office Supplies', 'Region': 'West', 'Segment': 'Corporate'},
+    {'Sales': 957.58, 'Category': 'Technology', 'Region': 'West', 'Segment': 'Consumer'},
+    {'Sales': 22.37, 'Category': 'Office Supplies', 'Region': 'West', 'Segment': 'Consumer'},
+    {'Sales': 48.86, 'Category': 'Furniture', 'Region': 'South', 'Segment': 'Consumer'},
+    {'Sales': 7.28, 'Category': 'Office Supplies', 'Region': 'West', 'Segment': 'Corporate'},
+    {'Sales': 907.15, 'Category': 'Technology', 'Region': 'West', 'Segment': 'Consumer'},
+    {'Sales': 18.50, 'Category': 'Office Supplies', 'Region': 'West', 'Segment': 'Consumer'},
+    {'Sales': 114.90, 'Category': 'Furniture', 'Region': 'South', 'Segment': 'Consumer'},
+    {'Sales': 394.27, 'Category': 'Technology', 'Region': 'East', 'Segment': 'Corporate'},
+    {'Sales': 2.544, 'Category': 'Office Supplies', 'Region': 'Central', 'Segment': 'Home Office'},
+    {'Sales': 1685.60, 'Category': 'Technology', 'Region': 'West', 'Segment': 'Consumer'},
+    {'Sales': 87.78, 'Category': 'Furniture', 'Region': 'Central', 'Segment': 'Consumer'},
+    {'Sales': 45.20, 'Category': 'Office Supplies', 'Region': 'East', 'Segment': 'Consumer'},
+] * 7  # 105 registros en total
+
 def load_data():
-    """Carga datos de muestra para el dashboard"""
-    try:
-        # Intentar cargar desde data/raw/train.csv
-        data_path = Path(__file__).parent.parent / 'data' / 'raw' / 'train.csv'
-        if data_path.exists():
-            df = pd.read_csv(data_path)
-            # Limitar a 100 registros para Vercel
-            return df.head(100)
-    except Exception as e:
-        print(f"Error cargando datos: {e}")
-    
-    # Datos dummy si no se encuentra el archivo
-    return pd.DataFrame({
-        'Sales': [261.96, 731.94, 14.62, 957.58, 22.37, 48.86, 7.28, 907.15, 18.50, 114.90] * 10,
-        'Category': ['Furniture', 'Furniture', 'Office Supplies', 'Technology', 'Office Supplies'] * 20,
-        'Region': ['South', 'South', 'West', 'West', 'West'] * 20,
-        'Segment': ['Consumer', 'Consumer', 'Corporate', 'Consumer', 'Consumer'] * 20
-    })
+    """Retorna datos de muestra"""
+    return SAMPLE_DATA
 
 @app.route('/')
 def home():
@@ -63,25 +64,17 @@ def home():
 def get_stats():
     """API: Estadísticas del dataset"""
     try:
-        df = load_data()
+        data = load_data()
+        sales = [record['Sales'] for record in data]
         
-        # Detectar columna de ventas (Sales o sales)
-        sales_col = 'Sales' if 'Sales' in df.columns else 'sales' if 'sales' in df.columns else None
-        
-        if sales_col:
-            stats = {
-                'total_records': int(len(df)),
-                'mean_sales': float(df[sales_col].mean()),
-                'max_sales': float(df[sales_col].max()),
-                'min_sales': float(df[sales_col].min()),
-                'total_sales': float(df[sales_col].sum()),
-                'median_sales': float(df[sales_col].median())
-            }
-        else:
-            stats = {
-                'error': 'Columna de ventas no encontrada',
-                'columns': list(df.columns)
-            }
+        stats = {
+            'total_records': len(data),
+            'mean_sales': round(sum(sales) / len(sales), 2),
+            'max_sales': round(max(sales), 2),
+            'min_sales': round(min(sales), 2),
+            'total_sales': round(sum(sales), 2),
+            'median_sales': round(sorted(sales)[len(sales) // 2], 2)
+        }
         
         return jsonify(stats)
     except Exception as e:
@@ -91,18 +84,15 @@ def get_stats():
 def get_data():
     """API: Obtener datos para gráficos"""
     try:
-        df = load_data()
+        data = load_data()
         
         # Limitar a 50 registros para gráficos
-        sample = df.head(50)
-        
-        # Convertir a formato JSON serializable
-        data = sample.to_dict('records')
+        sample = data[:50]
         
         return jsonify({
-            'data': data,
-            'columns': list(df.columns),
-            'total_records': len(df)
+            'data': sample,
+            'columns': ['Sales', 'Category', 'Region', 'Segment'],
+            'total_records': len(data)
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -111,21 +101,30 @@ def get_data():
 def get_categories():
     """API: Análisis por categorías"""
     try:
-        df = load_data()
+        data = load_data()
         
-        # Detectar columnas
-        sales_col = 'Sales' if 'Sales' in df.columns else 'sales'
-        category_col = 'Category' if 'Category' in df.columns else 'category'
+        # Agrupar por categoría manualmente
+        categories = {}
+        for record in data:
+            cat = record['Category']
+            if cat not in categories:
+                categories[cat] = {'sales': [], 'count': 0}
+            categories[cat]['sales'].append(record['Sales'])
+            categories[cat]['count'] += 1
         
-        if category_col in df.columns and sales_col in df.columns:
-            category_stats = df.groupby(category_col)[sales_col].agg(['sum', 'mean', 'count']).to_dict('index')
-            
-            return jsonify({
-                'categories': category_stats,
-                'category_column': category_col
-            })
-        else:
-            return jsonify({'error': 'Columnas no encontradas'}), 404
+        # Calcular estadísticas
+        category_stats = {}
+        for cat, info in categories.items():
+            category_stats[cat] = {
+                'sum': round(sum(info['sales']), 2),
+                'mean': round(sum(info['sales']) / info['count'], 2),
+                'count': info['count']
+            }
+        
+        return jsonify({
+            'categories': category_stats,
+            'category_column': 'Category'
+        })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

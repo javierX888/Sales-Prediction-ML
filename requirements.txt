@@ -6,9 +6,3 @@
 # Web Framework
 Flask==3.0.0
 Werkzeug==3.0.1
-
-# Data handling ligero (solo para leer CSV)
-pandas==2.0.3
-
-# Numpy es requerido por pandas pero usamos versión compatible con Python 3.12
-numpy>=1.26.0
