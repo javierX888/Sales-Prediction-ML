@@ -71,10 +71,13 @@ Sales-Prediction-ML/
 │
 ├── Dockerfile / Containerfile # Configuración de contenedor
 ├── docker-compose.yml         # Orquestación de servicios
-├── requirements.txt           # Dependencias del proyecto
+├── requirements.txt           # Dependencias para Vercel (Flask + pandas)
+├── requirements-full.txt      # Dependencias completas (ML, notebooks, etc.)
 ├── vercel.json               # Configuración para Vercel
 └── README.md                  # Esta documentación
 ```
+
+> **Nota:** `requirements.txt` contiene solo las dependencias mínimas para el deployment en Vercel. Para desarrollo local completo, usa `requirements-full.txt`.
 
 ## 🚀 Instalación y Configuración
 
@@ -238,9 +241,9 @@ venv\Scripts\activate.bat
 # Linux/Mac:
 source venv/bin/activate
 
-# 3. Instalar dependencias
+# 3. Instalar dependencias completas (incluye ML, notebooks, etc.)
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r requirements-full.txt
 
 # 4. Verificar instalación
 python -c "import pandas, sklearn, xgboost; print('Instalación exitosa')"
