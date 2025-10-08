@@ -4,31 +4,54 @@ Autor: Javier Gacitúa | Octubre 2025
 """
 from flask import Flask, request, jsonify
 from pathlib import Path
+import csv
 
 app = Flask(__name__)
 
-# Datos de muestra estáticos (sin pandas para evitar problemas de compatibilidad)
-SAMPLE_DATA = [
+# Datos de respaldo en caso de que no se encuentre el CSV
+FALLBACK_DATA = [
     {'Sales': 261.96, 'Category': 'Furniture', 'Region': 'South', 'Segment': 'Consumer'},
     {'Sales': 731.94, 'Category': 'Furniture', 'Region': 'South', 'Segment': 'Consumer'},
     {'Sales': 14.62, 'Category': 'Office Supplies', 'Region': 'West', 'Segment': 'Corporate'},
     {'Sales': 957.58, 'Category': 'Technology', 'Region': 'West', 'Segment': 'Consumer'},
-    {'Sales': 22.37, 'Category': 'Office Supplies', 'Region': 'West', 'Segment': 'Consumer'},
-    {'Sales': 48.86, 'Category': 'Furniture', 'Region': 'South', 'Segment': 'Consumer'},
-    {'Sales': 7.28, 'Category': 'Office Supplies', 'Region': 'West', 'Segment': 'Corporate'},
-    {'Sales': 907.15, 'Category': 'Technology', 'Region': 'West', 'Segment': 'Consumer'},
-    {'Sales': 18.50, 'Category': 'Office Supplies', 'Region': 'West', 'Segment': 'Consumer'},
-    {'Sales': 114.90, 'Category': 'Furniture', 'Region': 'South', 'Segment': 'Consumer'},
-    {'Sales': 394.27, 'Category': 'Technology', 'Region': 'East', 'Segment': 'Corporate'},
-    {'Sales': 2.544, 'Category': 'Office Supplies', 'Region': 'Central', 'Segment': 'Home Office'},
-    {'Sales': 1685.60, 'Category': 'Technology', 'Region': 'West', 'Segment': 'Consumer'},
-    {'Sales': 87.78, 'Category': 'Furniture', 'Region': 'Central', 'Segment': 'Consumer'},
-    {'Sales': 45.20, 'Category': 'Office Supplies', 'Region': 'East', 'Segment': 'Consumer'},
-] * 7  # 105 registros en total
+] * 25  # 100 registros de respaldo
 
 def load_data():
-    """Retorna datos de muestra"""
-    return SAMPLE_DATA
+    """Carga datos reales del CSV o datos de respaldo"""
+    data_path = Path(__file__).parent.parent / 'data' / 'raw' / 'train.csv'
+    
+    if not data_path.exists():
+        print("CSV no encontrado, usando datos de respaldo")
+        return FALLBACK_DATA
+    
+    data = []
+    try:
+        with open(data_path, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for i, row in enumerate(reader):
+                if i >= 200:  # Limitar a 200 registros para Vercel
+                    break
+                
+                try:
+                    data.append({
+                        'Sales': float(row.get('Sales', 0)),
+                        'Category': row.get('Category', 'Unknown'),
+                        'Sub-Category': row.get('Sub-Category', 'Unknown'),
+                        'Region': row.get('Region', 'Unknown'),
+                        'Segment': row.get('Segment', 'Unknown'),
+                        'Quantity': int(row.get('Quantity', 0)) if row.get('Quantity') else 1,
+                        'Discount': float(row.get('Discount', 0)) if row.get('Discount') else 0,
+                        'Profit': float(row.get('Profit', 0)) if row.get('Profit') else 0
+                    })
+                except (ValueError, KeyError) as e:
+                    print(f"Error procesando fila {i}: {e}")
+                    continue
+        
+        print(f"Datos cargados: {len(data)} registros del CSV")
+        return data if data else FALLBACK_DATA
+    except Exception as e:
+        print(f"Error cargando CSV: {e}")
+        return FALLBACK_DATA
 
 @app.route('/')
 def home():
