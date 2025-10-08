@@ -80,7 +80,9 @@
                         <button onclick="changeChartType('bar')" class="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition">Barras</button>
                     </div>
                 </div>
-                <canvas id="salesChart" height="80"></canvas>
+                <div class="relative" style="height: 300px;">
+                    <canvas id="salesChart"></canvas>
+                </div>
             </div>
 
             <!-- Predictor Section -->
@@ -216,7 +218,8 @@
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: false,
+                        maintainAspectRatio: true,
+                        aspectRatio: 2,
                         plugins: {
                             legend: {
                                 display: true,
@@ -244,6 +247,11 @@
                                 beginAtZero: true,
                                 grid: {
                                     color: 'rgba(0, 0, 0, 0.05)'
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        return '$' + value.toFixed(0);
+                                    }
                                 }
                             },
                             x: {
@@ -251,6 +259,10 @@
                                     display: false
                                 }
                             }
+                        },
+                        animation: {
+                            duration: 750,
+                            easing: 'easeInOutQuart'
                         }
                     }
                 });
