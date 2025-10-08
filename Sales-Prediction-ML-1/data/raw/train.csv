@@ -1,0 +1,14 @@
+# Este archivo es un dataset de entrenamiento y debe contener datos en formato CSV. 
+# A continuación se presenta un ejemplo de cómo podría estructurarse el archivo train.csv.
+
+Order ID,Order Date,Ship Date,Product ID,Product Name,Category,Sales,Quantity,Discount
+1,01/01/2023,03/01/2023,101,Widget A,Widgets,100.00,2,0.10
+2,02/01/2023,04/01/2023,102,Widget B,Widgets,150.00,3,0.05
+3,03/01/2023,05/01/2023,103,Gadget A,Gadgets,200.00,1,0.00
+4,04/01/2023,06/01/2023,104,Gadget B,Gadgets,250.00,4,0.15
+5,05/01/2023,07/01/2023,105,Widget C,Widgets,300.00,5,0.20
+6,06/01/2023,08/01/2023,106,Widget D,Widgets,350.00,6,0.25
+7,07/01/2023,09/01/2023,107,Gadget C,Gadgets,400.00,7,0.30
+8,08/01/2023,10/01/2023,108,Gadget D,Gadgets,450.00,8,0.35
+9,09/01/2023,11/01/2023,109,Widget E,Widgets,500.00,9,0.40
+10,10/01/2023,12/01/2023,110,Widget F,Widgets,550.00,10,0.45

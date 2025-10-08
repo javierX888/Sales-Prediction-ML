@@ -1,0 +1,654 @@
+# 📊 Modelo de Predicción de Ventas - Machine Learning# 📊 Modelo de Predicción de Ventas - Machine Learning
+
+
+
+[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
+
+[![Podman](https://img.shields.io/badge/Podman-Ready-892CA0.svg)](https://podman.io/)[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg)](https://www.docker.com/)
+
+[![Docker](https://img.shields.io/badge/Docker-Compatible-2496ED.svg)](https://www.docker.com/)[![Streamlit](https://img.shields.io/badge/Streamlit-1.25+-red.svg)](https://streamlit.io/)
+
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.25+-red.svg)](https://streamlit.io/)[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+> 🐳 **Proyecto 100% Dockerizado** - No necesitas instalar Python en tu PC
+
+> 🐳 **Compatible con Podman y Docker** - O ejecución nativa sin contenedores
+
+## 🎯 Descripción del Proyecto
+
+Proyecto completo de Data Science para predecir ventas utilizando técnicas avanzadas de Machine Learning. Incluye análisis exploratorio de datos (EDA), feature engineering, múltiples modelos predictivos y un dashboard interactivo.
+
+Proyecto completo de Data Science para predecir ventas utilizando técnicas avanzadas de Machine Learning. Incluye análisis exploratorio de datos (EDA), feature engineering, múltiples modelos predictivos y un dashboard interactivo.
+
+**Objetivo:** Desarrollar un modelo predictivo robusto que ayude a optimizar decisiones de negocio basadas en predicciones de ventas precisas.
+
+**Objetivo:** Desarrollar un modelo predictivo robusto que ayude a optimizar decisiones de negocio basadas en predicciones de ventas precisas.
+
+## ✨ Características Principales
+
+**Dataset:** [Sales Forecasting - Kaggle](https://www.kaggle.com/datasets/rohitsahoo/sales-forecasting) (9,800 registros, 18 columnas)
+
+- � **100% Dockerizado** - No necesitas Python instalado, solo Docker Desktop
+
+**Demo en vivo:** [https://sales-prediction-ml.vercel.app](https://sales-prediction-ml.vercel.app)- �📈 **Análisis Exploratorio Completo (EDA)** con visualizaciones profesionales
+
+- 🔧 **Feature Engineering Avanzado** para mejorar el rendimiento del modelo
+
+## ✨ Características Principales- 🤖 **Múltiples Modelos de ML:**
+
+  - Linear Regression (baseline)
+
+- 🐳 **Contenedorizado** - Compatible con **Podman** (recomendado) o **Docker**  - Random Forest
+
+- 💻 **Ejecución Nativa** - También funciona sin contenedores  - XGBoost
+
+- 📈 **Análisis Exploratorio Completo (EDA)** con visualizaciones profesionales  - Prophet (series temporales)
+
+- 🔧 **Feature Engineering Avanzado** para mejorar el rendimiento del modelo- 📊 **Métricas de Evaluación:** RMSE, MAE, R², MAPE
+
+- 🤖 **Múltiples Modelos de ML:**- 🎨 **Visualizaciones Interactivas** con Plotly y Seaborn
+
+  - Linear Regression (baseline)- 🖥️ **Dashboard en Streamlit** para exploración interactiva
+
+  - Random Forest  - 💡 **Insights de Negocio** derivados del análisis
+
+  - XGBoost- 🚀 **Scripts de gestión** automatizados para Windows
+
+  - Prophet (series temporales)
+
+- 📊 **Métricas de Evaluación:** RMSE, MAE, R², MAPE## 📁 Estructura del Proyecto
+
+- 🎨 **Visualizaciones Interactivas** con Plotly y Seaborn
+
+- 🖥️ **Dashboard en Streamlit** para exploración interactiva```
+
+- 🌐 **Demo desplegado en Vercel**Sales-Prediction-ML/
+
+- 💡 **Insights de Negocio** derivados del análisis│
+
+├── data/
+
+## 📁 Estructura del Proyecto│   ├── raw/                    # Datos originales
+
+│   └── processed/              # Datos procesados
+
+```│
+
+Sales-Prediction-ML/├── notebooks/
+
+││   ├── 01_EDA.ipynb           # Análisis Exploratorio de Datos
+
+├── data/│   ├── 02_Feature_Engineering.ipynb  # Creación de variables
+
+│   ├── raw/                    # Datos originales (train.csv incluido)│   └── 03_Modeling.ipynb      # Entrenamiento de modelos
+
+│   └── processed/              # Datos procesados│
+
+│├── src/
+
+├── notebooks/│   ├── data_loader.py         # Carga de datos
+
+│   ├── 01_EDA.ipynb           # Análisis Exploratorio de Datos│   ├── preprocessing.py       # Limpieza y transformación
+
+│   ├── 02_Feature_Engineering.ipynb  # Creación de variables│   ├── feature_engineering.py # Creación de features
+
+│   └── 03_Modeling.ipynb      # Entrenamiento de modelos│   ├── models.py              # Modelos de ML
+
+││   └── visualization.py       # Funciones de visualización
+
+├── src/│
+
+│   ├── data_loader.py         # Carga de datos (Kaggle o local)├── app/
+
+│   ├── preprocessing.py       # Limpieza y transformación│   └── dashboard.py           # Dashboard interactivo Streamlit
+
+│   ├── feature_engineering.py # Creación de features│
+
+│   ├── models.py              # Modelos de ML├── models/
+
+│   └── visualization.py       # Funciones de visualización│   └── saved_models/          # Modelos entrenados guardados
+
+││
+
+├── app/├── requirements.txt           # Dependencias del proyecto
+
+│   └── dashboard.py           # Dashboard interactivo Streamlit├── README.md                  # Documentación
+
+│└── .gitignore
+
+├── api/                       # API Flask para Vercel```
+
+│   └── index.py              # Backend del dashboard web
+
+│## 🚀 Instalación y Configuración
+
+├── templates/                 # Templates HTML
+
+│   └── index.html            # Dashboard web### Opción A: Usando Docker (Recomendado) 🐳
+
+│
+
+├── models/**Requisitos:**
+
+│   └── saved_models/          # Modelos entrenados guardados- Docker Desktop instalado
+
+│
+
+├── Dockerfile / Containerfile # Configuración de contenedor**Inicio rápido:**
+
+├── docker-compose.yml         # Orquestación de servicios
+
+├── requirements.txt           # Dependencias del proyecto```powershell
+
+├── vercel.json               # Configuración para Vercel# 1. Clonar el repositorio
+
+└── README.md                  # Esta documentacióngit clone https://github.com/javierX888/Sales-Prediction-ML.git
+
+```cd Sales-Prediction-ML
+
+
+
+## 🚀 Instalación y Configuración# 2. Usar el script de gestión (Windows)
+
+.\docker-manager.ps1
+
+Tienes **3 opciones** para ejecutar este proyecto:
+
+# O iniciar manualmente
+
+---docker-compose up -d
+
+
+
+### 🌟 Opción 1: Usando Podman (Recomendado)# 3. Acceder a los servicios
+
+# Jupyter Lab: http://localhost:8888
+
+[Podman](https://podman.io/) es una alternativa a Docker, sin daemon, más segura y de código abierto.# Dashboard: http://localhost:8501
+
+```
+
+**Requisitos:**
+
+- [Podman Desktop](https://podman-desktop.io/downloads) instalado📖 **[Ver guía completa de Docker](DOCKER.md)**
+
+
+
+**Ventajas sobre Docker:**### Opción B: Instalación Local (Python instalado)
+
+- ✅ Sin daemon (más seguro)
+
+- ✅ Rootless por defecto  **Requisitos:**
+
+- ✅ Compatible con Docker CLI- Python 3.9 o superior
+
+- ✅ Código 100% abierto- pip (gestor de paquetes de Python)
+
+- ✅ Menor consumo de recursos
+
+**Pasos:**
+
+**Instalación Windows:**
+
+1. **Clonar el repositorio:**
+
+```powershell```bash
+
+# Instalar con Wingetgit clone https://github.com/javierX888/Sales-Prediction-ML.git
+
+winget install -e --id RedHat.Podman-Desktopcd Sales-Prediction-ML
+
+```
+
+# O descargar desde: https://podman-desktop.io/downloads
+
+```2. **Crear entorno virtual:**
+
+```powershell
+
+**Inicio rápido:**python -m venv venv
+
+# Windows
+
+```powershellvenv\Scripts\activate
+
+# 1. Clonar el repositorio# Linux/Mac
+
+git clone https://github.com/javierX888/Sales-Prediction-ML.gitsource venv/bin/activate
+
+cd Sales-Prediction-ML```
+
+
+
+# 2. Construir e iniciar con Podman Compose3. **Instalar dependencias:**
+
+podman-compose up -d```bash
+
+pip install -r requirements.txt
+
+# O usar Podman directamente```
+
+podman build -t sales-prediction .
+
+podman run -d -p 8888:8888 -p 8501:8501 \4. **Ejecutar notebooks de análisis:**
+
+  -v ./data:/app/data \```bash
+
+  -v ./notebooks:/app/notebooks \jupyter notebook
+
+  sales-prediction```
+
+
+
+# 3. Acceder a los servicios5. **Lanzar dashboard:**
+
+# Jupyter Lab: http://localhost:8888```bash
+
+# Dashboard: http://localhost:8501streamlit run app/dashboard.py
+
+``````
+
+
+
+**Comandos útiles de Podman:**## 📊 Uso del Proyecto
+
+
+
+```powershell### 1. Análisis Exploratorio (EDA)
+
+# Ver contenedores en ejecuciónAbrir `notebooks/01_EDA.ipynb` para explorar:
+
+podman ps- Distribución de variables
+
+- Correlaciones
+
+# Ver logs- Outliers y valores faltantes
+
+podman logs sales-prediction-jupyter- Patrones temporales
+
+podman logs sales-prediction-dashboard
+
+### 2. Feature Engineering
+
+# Detener serviciosEjecutar `notebooks/02_Feature_Engineering.ipynb` para:
+
+podman-compose down- Crear variables derivadas
+
+- Codificar variables categóricas
+
+# Limpiar todo- Normalización y escalado
+
+podman system prune -a
+
+```### 3. Modelado
+
+Entrenar modelos con `notebooks/03_Modeling.ipynb`:
+
+---- Comparación de algoritmos
+
+- Optimización de hiperparámetros
+
+### 🐳 Opción 2: Usando Docker- Evaluación de métricas
+
+
+
+**Requisitos:**### 4. Dashboard Interactivo
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado```bash
+
+streamlit run app/dashboard.py
+
+**Inicio rápido:**```
+
+
+
+```powershell## 📈 Resultados y Métricas
+
+# 1. Clonar el repositorio
+
+git clone https://github.com/javierX888/Sales-Prediction-ML.git### Comparación de Modelos
+
+cd Sales-Prediction-ML
+
+| Modelo | RMSE | MAE | R² | MAPE |
+
+# 2. Iniciar con Docker Compose|--------|------|-----|-----|------|
+
+docker-compose up -d| Linear Regression | TBD | TBD | TBD | TBD |
+
+| Random Forest | TBD | TBD | TBD | TBD |
+
+# O usar script de gestión (Windows)| XGBoost | TBD | TBD | TBD | TBD |
+
+.\docker-manager.ps1| Prophet | TBD | TBD | TBD | TBD |
+
+
+
+# 3. Acceder a los servicios*Nota: Las métricas se actualizarán después del entrenamiento*
+
+# Jupyter Lab: http://localhost:8888
+
+# Dashboard: http://localhost:8501## 💡 Insights de Negocio
+
+```
+
+🔍 **Principales Hallazgos:**
+
+**Comandos útiles de Docker:**- [Pendiente: Se completará después del análisis]
+
+
+
+```powershell📊 **Recomendaciones:**
+
+# Ver contenedores- [Pendiente: Se completará después del análisis]
+
+docker ps
+
+## 🛠️ Tecnologías Utilizadas
+
+# Ver logs
+
+docker logs sales-prediction-jupyter- **Python 3.9+**
+
+- **Data Science:** Pandas, NumPy, SciPy
+
+# Detener servicios- **Machine Learning:** Scikit-learn, XGBoost, Prophet
+
+docker-compose down- **Visualización:** Matplotlib, Seaborn, Plotly
+
+- **Dashboard:** Streamlit
+
+# Reconstruir imágenes- **Notebooks:** Jupyter
+
+docker-compose build --no-cache
+
+```## 📝 Roadmap del Proyecto
+
+
+
+📖 **[Ver guía completa de Docker](DOCKER.md)**- [x] Configuración inicial del proyecto
+
+- [ ] Análisis exploratorio de datos (EDA)
+
+---- [ ] Feature engineering
+
+- [ ] Entrenamiento de modelos
+
+### 💻 Opción 3: Instalación Nativa (Sin Contenedores)- [ ] Optimización de hiperparámetros
+
+- [ ] Dashboard interactivo
+
+Para ejecutar el proyecto directamente en tu sistema sin Podman o Docker.- [ ] Documentación completa
+
+- [ ] Deployment
+
+**Requisitos:**
+
+- Python 3.9 o superior## 👨‍💻 Autor
+
+- pip (gestor de paquetes de Python)
+
+- 4GB RAM mínimo recomendado**Javier Gacitúa**  
+
+Analista de Datos | Data Scientist
+
+**Instalación Python:**
+
+## Contacto
+
+**Windows:**
+
+```powershell📧 javiergaci.q@gmail.com  
+
+# Descargar desde: https://www.python.org/downloads/💼 [LinkedIn](https://www.linkedin.com/in/javier-gacitúa)
+
+# O instalar con Winget  
+
+winget install -e --id Python.Python.3.9## Estadísticas de GitHub
+
+
+
+# Verificar instalación![Javier's GitHub stats](https://github-readme-stats.vercel.app/api?username=javierX888&show_icons=true&theme=default)
+
+python --version
+```
+
+**Linux/Mac:**
+```bash
+# Ubuntu/Debian
+sudo apt update
+sudo apt install python3.9 python3-pip
+
+# macOS (con Homebrew)
+brew install python@3.9
+```
+
+**Pasos de instalación:**
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/javierX888/Sales-Prediction-ML.git
+cd Sales-Prediction-ML
+
+# 2. Crear entorno virtual (recomendado)
+python -m venv venv
+
+# Activar entorno virtual:
+# Windows PowerShell:
+.\venv\Scripts\Activate.ps1
+# Windows CMD:
+venv\Scripts\activate.bat
+# Linux/Mac:
+source venv/bin/activate
+
+# 3. Instalar dependencias
+pip install --upgrade pip
+pip install -r requirements.txt
+
+# 4. Verificar instalación
+python -c "import pandas, sklearn, xgboost; print('Instalación exitosa')"
+```
+
+**Ejecutar Jupyter Lab:**
+
+```bash
+# Iniciar Jupyter Lab
+jupyter lab --port=8888 --no-browser
+
+# Abrir en navegador: http://localhost:8888
+```
+
+**Ejecutar Dashboard:**
+
+```bash
+# Iniciar Streamlit
+streamlit run app/dashboard.py --server.port=8501
+
+# Abrir en navegador: http://localhost:8501
+```
+
+**Ejecutar notebooks:**
+
+```bash
+# Opción 1: Desde Jupyter Lab (recomendado)
+jupyter lab
+
+# Opción 2: Desde línea de comandos
+jupyter nbconvert --execute --to notebook --inplace notebooks/01_EDA.ipynb
+```
+
+---
+
+## 📊 Dataset
+
+**Fuente:** [Sales Forecasting - Kaggle](https://www.kaggle.com/datasets/rohitsahoo/sales-forecasting)
+
+**Descripción:**
+- **Tamaño:** 9,800 registros
+- **Columnas:** 18 variables
+- **Tipo:** Datos de ventas históricos
+- **Ubicación:** `data/raw/train.csv` (incluido en el repositorio)
+
+**Columnas principales:**
+- `Order Date`: Fecha del pedido
+- `Sales`: Monto de la venta (variable objetivo)
+- `Category`: Categoría del producto
+- `Region`: Región geográfica
+- `Segment`: Segmento de cliente
+
+---
+
+## 🎯 Uso del Proyecto
+
+### 1️⃣ Análisis Exploratorio (EDA)
+
+```bash
+# Abrir Jupyter Lab: http://localhost:8888
+# Navegar a: notebooks/01_EDA.ipynb
+```
+
+El notebook incluye:
+- Carga y exploración inicial del dataset
+- Análisis de valores faltantes
+- Distribución de la variable objetivo (ventas)
+- Análisis de correlaciones
+- Detección de outliers
+- Visualizaciones interactivas
+
+### 2️⃣ Feature Engineering
+
+```bash
+# Navegar a: notebooks/02_Feature_Engineering.ipynb
+```
+
+Transformaciones incluidas:
+- Features temporales (día, mes, año, día de la semana)
+- Lag features (ventas pasadas)
+- Rolling features (promedios móviles)
+- Encoding de variables categóricas
+- Normalización de features numéricas
+
+### 3️⃣ Modelado
+
+```bash
+# Navegar a: notebooks/03_Modeling.ipynb
+```
+
+Modelos entrenados:
+- Regresión Lineal (baseline)
+- Random Forest
+- XGBoost
+- Prophet (series temporales)
+
+Evaluación con métricas:
+- RMSE (Root Mean Squared Error)
+- MAE (Mean Absolute Error)
+- R² (Coeficiente de Determinación)
+- MAPE (Mean Absolute Percentage Error)
+
+### 4️⃣ Dashboard Interactivo
+
+```bash
+# Local: http://localhost:8501
+# Demo: https://sales-prediction-ml.vercel.app
+```
+
+Funcionalidades del dashboard:
+- Visualización de estadísticas clave
+- Gráficos interactivos
+- Predicción en tiempo real
+- Análisis por categorías
+
+---
+
+## 🛠️ Tecnologías Utilizadas
+
+**Machine Learning:**
+- scikit-learn 1.3.0
+- XGBoost 1.7.6
+- Prophet 1.1.4
+
+**Data Science:**
+- Pandas 2.0.3
+- NumPy 1.24.3
+- SciPy 1.11.1
+
+**Visualización:**
+- Matplotlib 3.7.2
+- Seaborn 0.12.2
+- Plotly 5.15.0
+
+**Dashboard:**
+- Streamlit 1.25.0
+- Flask 3.0.0 (para Vercel)
+
+**Desarrollo:**
+- Jupyter Lab
+- Python 3.9
+
+**Contenedores:**
+- Podman (recomendado)
+- Docker (compatible)
+
+**Deploy:**
+- Vercel (demo web)
+
+---
+
+## 🤝 Contribuciones
+
+Las contribuciones son bienvenidas. Por favor:
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+---
+
+## 📝 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver archivo [LICENSE](LICENSE) para más detalles.
+
+---
+
+## 👤 Autor
+
+**Javier Gacitúa**
+
+- GitHub: [@javierX888](https://github.com/javierX888)
+- Email: javiergaci.q@gmail.com
+- Proyecto: [Sales-Prediction-ML](https://github.com/javierX888/Sales-Prediction-ML)
+- Demo: [https://sales-prediction-ml.vercel.app](https://sales-prediction-ml.vercel.app)
+
+---
+
+## 🙏 Agradecimientos
+
+- Dataset de [Kaggle - Sales Forecasting](https://www.kaggle.com/datasets/rohitsahoo/sales-forecasting)
+- Comunidad de Podman y Docker
+- Streamlit por el framework de dashboard
+- Vercel por el hosting gratuito
+
+---
+
+## 📚 Documentación Adicional
+
+- [QUICKSTART.md](QUICKSTART.md) - Guía de inicio rápido
+- [DOCKER.md](DOCKER.md) - Guía detallada de Docker/Podman
+- [DOCKER-COMMANDS.md](DOCKER-COMMANDS.md) - Referencia de comandos
+- [ARCHITECTURE.md](ARCHITECTURE.md) - Arquitectura del proyecto
+- [CHECKLIST.md](CHECKLIST.md) - Lista de verificación
+
+---
+
+## ⭐ Si te gustó este proyecto
+
+Dale una estrella ⭐ al repositorio y compártelo con otros.
+
+---
+
+**Última actualización:** Octubre 2025

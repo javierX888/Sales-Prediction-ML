@@ -39,3 +39,7 @@ tqdm==4.65.0
 
 # Statistical Analysis
 statsmodels==0.14.0
+
+# Flask para deployment en Vercel
+Flask==3.0.0
+Werkzeug==3.0.1

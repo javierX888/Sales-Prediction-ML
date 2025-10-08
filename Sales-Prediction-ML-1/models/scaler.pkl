@@ -1,0 +1,3 @@
+# Este archivo es un objeto de escalado (scaler) utilizado para normalizar los datos, guardado en formato pickle. 
+# El contenido del archivo scaler.pkl debe ser generado por el proceso de entrenamiento y guardado en el modelo correspondiente. 
+# Por lo tanto, este archivo se deja intencionalmente en blanco.
